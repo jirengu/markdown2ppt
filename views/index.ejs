@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div id="page">
+      <h1><%= title %></h1>
+      <form action="/md2ppt">
+        <input id="url" type="url" required name="url" placeholder="线上的markdown文件地址"><input type="submit" value="转换">
+        <select name="theme" id="theme">
+          <option value="none">主题</option>
+          <option value="beige">beige</option>
+          <option value="black">black</option>
+          <option value="blood">blood</option>
+          <option value="league">league</option>
+          <option value="moon">moon</option>
+          <option value="night">night</option>
+          <option value="serif">serif</option>
+          <option value="simple">simple</option>
+          <option value="sky">sky</option>
+          <option value="solarized">solarized</option>
+          <option value="white">white</option>
+        </select>
+        <select name="trans" id="trans">
+          <option value="none">转场</option>
+          <option value="fade">fade</option>
+          <option value="slide">slide</option>
+          <option value="convex">convex</option>
+          <option value="concave">concave</option>
+          <option value="zoom">zoom</option>
+          
+        </select>
+      </form>      
+    </div>
+    <div id="tips">
+      <h5>提示</h5>
+      <ol>
+        <li>url 填写线上可以预览的 markdown 地址，比如可以把 markdown 放入 Github 项目，使用 Raw 的线上链接</li>
+        <li>markdown文件中 一级标题#下的内容 代表slides 的封面， 二级标题## 下的内容代表左右可切换的页面， 三级标题### 代表上下切换的子页面</li>
+        <li>每个标题下内容不要过多，否则一个页面放不下</li>
+        <li>参考: https://www.npmjs.com/package/ppt-cli 里的用法</li>
+      </ol>
+    </div>
+
+    <div id="footer"> 饥人谷出品，必属精品</div>
+
+  <script>
+
+    document.querySelector('#url').value = localStorage.md2ppt_url || ''
+    document.querySelector('#theme').value = localStorage.md2ppt_theme || 'black'
+    document.querySelector('#trans').value = localStorage.md2ppt_trans || 'slide'
+
+    document.querySelector('#url').oninput = function(){
+      localStorage.md2ppt_url = this.value
+    }
+    document.querySelector('#theme').onchange = function(){
+      localStorage.md2ppt_theme = this.value
+    }
+    document.querySelector('#trans').onchange = function(){
+      localStorage.md2ppt_trans = this.value
+    }
+
+
+  </script>
+  </body>
+</html>
